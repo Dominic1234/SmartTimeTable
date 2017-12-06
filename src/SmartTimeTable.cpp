@@ -10,7 +10,7 @@
 #include<string.h>
 #include<conio.h>
 
-//#OneTeacherOnedayOneClass
+
 struct teacher
 {
  char name[40];
@@ -23,49 +23,97 @@ struct day
  int mon[9], tue[9], wed[9], thur[9], fri[9];
 };
 
-int count=-1;
+int count=-1, temp=-1;
 teacher sample[40];
-day s;
+day a11a, b11b;
 
 void teacherzero();
 void algorithm();
-void display();
+void diplay();
+void teacherzero11b();
+
+int search()
+{ 
+  for(int i=0; i<count; i++)
+  {
+    if(strcmpi(sample[count].name,sample[i].name)==0)
+    {
+      return i;
+    }
+}
+return -1;
+}
+        
 
 int input()
-{ count++;
+{   if(temp>count)
+     count=temp;
+    count++;
   teacherzero();
  int subjectcount;
- cout<<"ENTER THE NAME OF THE TEACHER";
+ cout<<"\nEnter name of the teacher:  ";
  cin>>sample[count].name;
- cout<<"\nENTER SUBJECT";
+ int store = search();
+ if(store!=-1)
+ { count--;
+   temp=count;
+   count=store;
+}
+ cout<<"\nEnter subject:  ";
  cin>>sample[count].subject;
- cout<<"\nnenter no of periods for today";
+ cout<<"\nEnter no. of periods required for today: ";
  cin>>subjectcount;
+
  return subjectcount;
 }
+
+int input11b()
+{   if(temp>count)
+     count=temp;
+    count++;
+  teacherzero11b();
+ int subjectcount;
+ cout<<"\nEnter the name of the teacher:  ";
+ cin>>sample[count].name;
+ int store = search();
+ 
+ 
+ if(store!=-1)
+ { --count;
+   temp=count;
+   count=store;
+}
+ cout<<"\nEnter subject taught:  ";
+ cin>>sample[count].subject;
+ cout<<"\nEnter no of periods for today:  ";
+ cin>>subjectcount;
+
+ return subjectcount;
+}
+
 void algorithm()
 { int subcount, periodno;
- cout<<"enter teacher details";
+ cout<<"\nEnter teacher details";
  subcount=input();
  for(int i=0; i<subcount; i++)
- {
+ { 
    randomize();
    periodno=random(9)+1;
    if(sample[count].mon[periodno-1]==0)
    {
-    if(s.mon[periodno-1]==0)
+    if(a11a.mon[periodno-1]==0)
     {
      sample[count].mon[periodno-1]=1;
-     if(strcmpi(sample[count].subject,"math")==0)
-      s.mon[periodno-1]=1;
-      if(strcmpi(sample[count].subject,"chem")==0)
-      s.mon[periodno-1]=2;
-      if(strcmpi(sample[count].subject,"eng")==0)
-      s.mon[periodno-1]=3;
-      if(strcmpi(sample[count].subject,"phy")==0)
-      s.mon[periodno-1]=4;
-      if(strcmpi(sample[count].subject,"comp")==0)
-      s.mon[periodno-1]=5;
+     if(strcmpi(sample[count].subject,"Math")==0)
+      a11a.mon[periodno-1]=1;
+      if(strcmpi(sample[count].subject,"Chem")==0)
+      a11a.mon[periodno-1]=2;
+      if(strcmpi(sample[count].subject,"Eng")==0)
+      a11a.mon[periodno-1]=3;
+      if(strcmpi(sample[count].subject,"Phy")==0)
+      a11a.mon[periodno-1]=4;
+      if(strcmpi(sample[count].subject,"Comp")==0)
+     a11a.mon[periodno-1]=5;
     }
     else
     {
@@ -79,28 +127,100 @@ void algorithm()
     --i;
     continue;
    }
- } }
+ } 
+ }
+ 
+ 
+ void algorithm11b()
+{ int subcount, periodno;
+ cout<<"\nEnter teacher details:  ";
+ subcount=input11b();
+ for(int i=0; i<subcount; i++)
+ { 
+   randomize();
+   periodno=random(9)+1;
+   if(sample[count].mon[periodno-1]==0)
+   {
+    if(b11b.mon[periodno-1]==0)
+    {
+     sample[count].mon[periodno-1]=1;
+     if(strcmpi(sample[count].subject,"Math")==0)
+      b11b.mon[periodno-1]=1;
+      if(strcmpi(sample[count].subject,"Chem")==0)
+      b11b.mon[periodno-1]=2;
+      if(strcmpi(sample[count].subject,"Eng")==0)
+      b11b.mon[periodno-1]=3;
+      if(strcmpi(sample[count].subject,"Phy")==0)
+      b11b.mon[periodno-1]=4;
+      if(strcmpi(sample[count].subject,"Comp")==0)
+      b11b.mon[periodno-1]=5;
+    }
+    else
+    {
+     --i;
+     continue;
+    }
+
+   }
+   else
+   {
+    --i;
+    continue;
+   }
+ } 
+ }
+
 
 
 
 void display()
 {
  int i=0;
- cout<<"1     2      3       4      5      6      7      8       9\n";
+ cout<<"\n1 \t  2 \t   3  \t  4 \t   5 \t  6 \t  7 \t  8  \t  9\n";
  for(int j=0; j<9; j++)
  {
-   if(s.mon[j]==1)
-   cout<<" math ";
-   else if(s.mon[j]==2)
-   cout<<" chem ";
-   else if(s.mon[j]==3)
-   cout<<" eng ";
-   else if(s.mon[j]==4)
-   cout<<" phy ";
-   else if(s.mon[j]==5)
-   cout<<" comp ";
+   if(a11a.mon[j]==1)
+   cout<<"Math\t ";
+   else if(a11a.mon[j]==2)
+   cout<<"Chem\t ";
+   else if(a11a.mon[j]==3)
+   cout<<"Eng\t ";
+   else if(a11a.mon[j]==4)
+   cout<<"Phy\t ";
+   else if(a11a.mon[j]==5)
+   cout<<"Comp\t ";
    else
-   cout<<" na ";
+   cout<<"NA\t ";
+
+  }
+}
+
+void displayteacher()
+{ 
+ for(int i=0; i<9; i++)
+  cout<<sample[count].mon[i]<<"   ";
+  cout<<endl;
+}
+
+
+void display11b()
+{
+ int i=0;
+ cout<<"\n1 \t  2 \t   3  \t  4 \t   5 \t  6 \t  7 \t  8  \t  9\n";
+ for(int j=0; j<9; j++)
+ {
+   if(b11b.mon[j]==1)
+   cout<<"Math\t ";
+   else if(b11b.mon[j]==2)
+   cout<<"Chem\t ";
+   else if(b11b.mon[j]==3)
+   cout<<"Eng\t ";
+   else if(b11b.mon[j]==4)
+   cout<<"Phy\t ";
+   else if(b11b.mon[j]==5)
+   cout<<"Comp\t ";
+   else
+   cout<<"NA\t ";
 
   }
 }
@@ -117,11 +237,32 @@ void teacherzero()
    }if(k==0)
    { for(int j=0;j<9;j++)
    {
-    s.mon[j]=0;
-    s.tue[j]=0;
-    s.wed[j]=0;
-    s.thur[j]=0;
-    s.fri[j]=0;
+    a11a.mon[j]=0;
+    a11a.tue[j]=0;
+    a11a.wed[j]=0;
+    a11a.thur[j]=0;
+    a11a.fri[j]=0;
+    } }   k++;
+    }
+    
+void teacherzero11b()
+{
+  static int k=0;
+  for(int i=0; i<9;i++)
+  {
+    sample[count].mon[i]=0;
+    sample[count].tue[i]=0;
+    sample[count].wed[i]=0;
+    sample[count].thu[i]=0;
+    sample[count].fri[i]=0;
+   }if(k==0)
+   { for(int j=0;j<9;j++)
+   {
+    b11b.mon[j]=0;
+    b11b.tue[j]=0;
+    b11b.wed[j]=0;
+    b11b.thur[j]=0;
+    b11b.fri[j]=0;
     } }   k++;
     }
 void main()
@@ -129,8 +270,11 @@ void main()
   clrscr();
   algorithm();
   display();
+  algorithm11b();
+  display11b();
+  cout<<endl;
+  displayteacher();
   int y;
   cin>>y;
 }
-
 
