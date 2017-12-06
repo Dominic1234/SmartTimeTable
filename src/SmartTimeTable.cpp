@@ -1,10 +1,11 @@
 //============================================================================
 // Name        : SmartTimeTable.cpp
 // Author      : Arun,Aniket,Dhruv,Akif
-// Version     :1.0.1
+// Version     :1.0.2
 // Copyright   : copyright
 // Description : A smart time table
-//============================================================================
+//============================================================================ 
+//#MultipleTeacherSameTeachers2classesOneDay
 #include<iostream.h>
 #include<stdlib.h>
 #include<string.h>
