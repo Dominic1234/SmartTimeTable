@@ -94,7 +94,7 @@ int input11b()
 
 void algorithm()
 { int subcount, periodno;
- cout<<"\nEnter teacher details";
+ cout<<"\nEnter teacher details for 11A";
  subcount=input();
  for(int i=0; i<subcount; i++)
  { 
@@ -134,7 +134,7 @@ void algorithm()
  
  void algorithm11b()
 { int subcount, periodno;
- cout<<"\nEnter teacher details:  ";
+ cout<<"\nEnter teacher details for 11B";
  subcount=input11b();
  for(int i=0; i<subcount; i++)
  { 
@@ -269,13 +269,28 @@ void teacherzero11b()
 void main()
 {
   clrscr();
+  do{
+  char ans;
   algorithm();
   display();
+  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
+  cin>>ans;
+  clrscr();
+}while(ans==y);
+
+do{
+  char ans2;
   algorithm11b();
   display11b();
   cout<<endl;
   displayteacher();
+  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
+  cin>>ans2;
+  clrscr();
+}while(ans2==y);
   int y;
   cin>>y;
 }
+
+
 
