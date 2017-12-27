@@ -1,12 +1,11 @@
 //============================================================================
 // Name        : SmartTimeTable.cpp
 // Author      : Arun,Aniket,Dhruv,Akif
-// Version     : 1.2.1
+// Version     : 1.2.2
 // Copyright   : copyright
 // Description : A smart time table
 //============================================================================ 
 //#AlmostDone
-
 
 #include<iostream.h>
 #include<stdlib.h>
@@ -31,6 +30,7 @@ struct day
 int count=-1, temp=-1;
 int checkm=-1;
 char newans;
+int answer12312;
 teacher sample[40];
 day a12a,b12b,a11a, b11b,a10a,b10b,c10c,a9a,b9b,c9c,a8a,b8b,c8c,a7a,b7b,c7c,a6a,b6b,c6c,a5a,b5b,c5c,a4a,b4b,c4c,a3a,b3b,c3c,a2a,b2b,c2c,a1a,b1b,c1c;
 day mroom, biotech, avroom, ground, sstlab, audi, slab, artroom, mathlab, complab1, complab2, lib1, lib2, greenroom;
@@ -38,9 +38,280 @@ day mroom, biotech, avroom, ground, sstlab, audi, slab, artroom, mathlab, compla
 void teacherzero(day &x, int &ans2);
 void algorithm(day &x);
 void display(day &x);
+int input(day &x,char ch[3], int suanswer,int u);
+int menu();
+void initial2(day &x);
+void initial()
+{
+
+	answer12312=menu();
+	if(answer12312==1)
+	initial2(a12a);
+	else if(answer12312==2)
+	initial2(b12b);
+	else if(answer12312==3)
+	initial2(a11a);
+	else if(answer12312==4)
+    initial2(b11b);
+	else if(answer12312==5)
+		initial2(a10a);
+	else if(answer12312==6)
+		initial2(b10b);
+	else if(answer12312==7)
+		initial2(c10c);
+	else if(answer12312==8)
+		initial2(a9a);
+	else if(answer12312==9)
+		initial2(b9b);
+	else if(answer12312==10)
+		initial2(c9c);
+	else if(answer12312==11)
+		initial2(a8a);
+	else if(answer12312==12)
+		initial2(b8b);
+	else if(answer12312==13)
+		initial2(c8c);
+	else if(answer12312==14)
+		initial2(a7a);
+	else if(answer12312==15)
+		initial2(b7b);
+	else if(answer12312==16)
+		initial2(c7c);
+	else if(answer12312==17)
+		initial2(a6a);
+	else if(answer12312==18)
+		initial2(b6b);
+	else if(answer12312==19)
+		initial2(c6c);
+	else if(answer12312==20)
+		initial2(a5a);
+	else if(answer12312==21)
+		initial2(b5b);
+	else if(answer12312==22)
+		initial2(c5c);
+	else if(answer12312==23)
+		initial2(a4a);
+	else if(answer12312==24)
+		initial2(b4b);
+	else if(answer12312==25)
+		initial2(c4c);
+	else if(answer12312==26)
+		initial2(a3a);
+	else if(answer12312==27)
+		initial2(b3b);
+	else if(answer12312==28)
+		initial2(c3c);
+	else if(answer12312==29)
+	    initial2(a2a);
+	else if(answer12312==30)
+	    initial2(b2b);
+	else if(answer12312==31)
+		initial2(c2c);
+	else if(answer12312==32)
+		initial2(a1a);
+	else if(answer12312==33)
+		initial2(b1b);
+	else if(answer12312==34)
+		initial2(c1c);
+	else cout<<"NA sorry bye bye   ";
+
+	}
+
+void initial2(day &x)
+{   char subjecta[20];
+    char dayt[3];
+	int pno;
+	int asss;
+	int B[9],C[9],D[9];
+	cout<<"How many periods";
+    cin>>pno;
+
+	if(pno==1)
+	{ cout<<"Enter day";
+	  cin>>dayt;
+      pno=input(x,dayt,answer12312,1);
+		if(strcmpi(dayt,"Mo")==0)
+    {for(int i=0;i<9;i++)
+		{  B[i]=x.mon[i];
+	       C[i]=sample[count].mon[i];
+		   D[i]=sample[count].mond[i];
+		}
+    }
+    else if(strcmpi(dayt,"Tu")==0)
+    {for(int i=0;i<9;i++)
+     {     B[i]=x.tue[i];
+	       C[i]=sample[count].tue[i];
+		   D[i]=sample[count].tues[i];
+		}
+    }
+    else if(strcmpi(dayt,"We")==0)
+    {for(int k=0;k<9;k++)
+	{  B[k]=x.wed[k];
+	       C[k]=sample[count].wed[k];
+		   D[k]=sample[count].wedn[k];
+		}
+	}
+    else if(strcmpi(dayt,"Th")==0)
+    {for(int i=0;i<9;i++)
+		{  B[i]=x.thur[i];
+	       C[i]=sample[count].thu[i];
+		   D[i]=sample[count].thur[i];
+		}
+	}
+    else if(strcmpi(dayt,"Fr")==0)
+    {for(int i=0;i<9;i++)
+     {     B[i]=x.fri[i];
+	       C[i]=sample[count].fri[i];
+		   D[i]=sample[count].frid[i];
+	  }
+	}
+
+
+	  cout<<"Enter Period no. u wish to giv this subject";
+	  cin>>asss;
+	if(C[asss-1]==0&&B[asss-1]==0)
+	{
+       if(strcmpi(sample[count].subject,"Math")==0)
+      { B[asss-1]=1;
+		C[asss-1]=1;
+		}
+      else if(strcmpi(sample[count].subject,"Chem")==0)
+      {B[asss-1]=2;
+       C[asss-1]=2;}
+      else if(strcmpi(sample[count].subject,"Eng")==0)
+      {B[asss-1]=3;
+       C[asss-1]=3;}
+      else if(strcmpi(sample[count].subject,"Phy")==0)
+		{B[asss-1]=4;
+		 C[asss-1]=4;}
+      else if(strcmpi(sample[count].subject,"Comp")==0)
+      {B[asss-1]=5;
+       C[asss-1]=5;}
+      else if(strcmpi(sample[count].subject,"bio")==0)
+      {B[asss-1]=6;
+       C[asss-1]=6;}
+       else if(strcmpi(sample[count].subject,"elec")==0)
+      {B[asss-1]=7;
+       C[asss-1]=7;}
+       else if(strcmpi(sample[count].subject,"gs")==0)
+      {B[asss-1]=8;
+       C[asss-1]=8;}
+       else if(strcmpi(sample[count].subject,"ee")==0)
+      {B[asss-1]=9;
+       C[asss-1]=9;}
+       else if(strcmpi(sample[count].subject,"vpa")==0)
+      {B[asss-1]=10;
+       C[asss-1]=10;}
+       else if(strcmpi(sample[count].subject,"art")==0)
+      {B[asss-1]=11;
+       C[asss-1]=11;}
+       else if(strcmpi(sample[count].subject,"yoga")==0)
+      {B[asss-1]=12;
+       C[asss-1]=12;}
+       else if(strcmpi(sample[count].subject,"pt")==0)
+      {B[asss-1]=13;
+       C[asss-1]=13;}
+       else if(strcmpi(sample[count].subject,"club")==0)
+      {B[asss-1]=14;
+       C[asss-1]=14;}
+       else if(strcmpi(sample[count].subject,"lang")==0)
+      {B[asss-1]=15;
+       C[asss-1]=15;}
+       else if(strcmpi(sample[count].subject,"seclang")==0)
+      {B[asss-1]=16;
+       C[asss-1]=16;}
+	   else if(strcmpi(sample[count].subject,"hist")==0)
+      {B[asss-1]=17;
+       C[asss-1]=17;}
+	   else if(strcmpi(sample[count].subject,"civ")==0)
+      {B[asss-1]=18;
+       C[asss-1]=18;}
+	   else if(strcmpi(sample[count].subject,"geo")==0)
+      {B[asss-1]=19;
+       C[asss-1]=19;}
+	   else if(strcmpi(sample[count].subject,"ss")==0)
+      {B[asss-1]=20;
+       C[asss-1]=20;}
+	   else if(strcmpi(sample[count].subject,"aep")==0)
+      {B[asss-1]=21;
+       C[asss-1]=21;}
+	   else if(strcmpi(sample[count].subject,"evs")==0)
+      {B[asss-1]=22;
+       C[asss-1]=22;}
+	   else if(strcmpi(sample[count].subject,"gsc")==0)
+      {B[asss-1]=23;
+       C[asss-1]=23;}
+	   else if(strcmpi(sample[count].subject,"rp")==0)
+      {B[asss-1]=24;
+       C[asss-1]=24;}
+	   else if(strcmpi(sample[count].subject,"im")==0)
+      {B[asss-1]=25;
+       C[asss-1]=25;}
+	   else if(strcmpi(sample[count].subject,"wm")==0)
+      {B[asss-1]=26;
+       C[asss-1]=26;}
+	   else if(strcmpi(sample[count].subject,"dan")==0)
+      {B[asss-1]=27;
+       C[asss-1]=27;}
+	   else if(strcmpi(sample[count].subject,"ls")==0)
+      {B[asss-1]=28;
+       C[asss-1]=28;}
+	   else if(strcmpi(sample[count].subject,"ml")==0)
+      {B[asss-1]=29;
+       C[asss-1]=29;}
+	   else if(strcmpi(sample[count].subject,"mp")==0)
+      {B[asss-1]=30;
+       C[asss-1]=30;}
+
+	   D[asss-1]=answer12312;
+	}
+	 else
+	 {
+		 cout<<"you just can do shit";
+	 }
+
+	  if(strcmpi(dayt,"Mo")==0)
+ { for(int i=0;i<9;i++)
+   { x.mon[i]=B[i];
+     sample[count].mon[i]=C[i];
+     sample[count].mond[i]=D[i];
+    }
+ }
+else if(strcmpi(dayt,"Tu")==0)
+ { for(int i=0;i<9;i++)
+   { x.tue[i]=B[i];
+     sample[count].tue[i]=C[i];
+     sample[count].tues[i]=D[i];
+    }
+ }
+ else if(strcmpi(dayt,"We")==0)
+ { for(int i=0;i<9;i++)
+   { x.wed[i]=B[i];
+     sample[count].wed[i]=C[i];
+     sample[count].wedn[i]=D[i];
+    }
+ }
+ else if(strcmpi(dayt,"Th")==0)
+ { for(int i=0;i<9;i++)
+   { x.thur[i]=B[i];
+     sample[count].thu[i]=C[i];
+     sample[count].thur[i]=D[i];
+    }
+ }
+ else if(strcmpi(dayt,"Fr")==0)
+ { for(int i=0;i<9;i++)
+   { x.fri[i]=B[i];
+     sample[count].fri[i]=C[i];
+     sample[count].frid[i]=D[i];
+    }
+ }
+   }
+}
+
+
 void saveteacher(int P[9])
 {
-	   
+
 	  if(P[0]!=0&&P[1]!=0&&P[2]==0)
 	  P[2]=123;
       if(P[0]!=0&&P[2]!=0&&P[1]==0)
@@ -90,28 +361,28 @@ void resettt(day &x,char ch[3],int subb)
     { for(int k=0;k<9;k++)
        x.fri[k]=0;
     }
-		
+
     for(int p=0; p<=checkm; p++)
-	{  
+	{
 	  if(strcmpi(ch,"Mo")==0)
-       { 
-          for(int j=0;j<9;j++)
-        { 
-          K[j]=sample[p].mon[j];
-          C[j]=sample[p].mond[j];
-        }
+       {
+	  for(int j=0;j<9;j++)
+	{
+	  K[j]=sample[p].mon[j];
+	  C[j]=sample[p].mond[j];
+	}
        }
       else if(strcmpi(ch,"Tu")==0)
-     { 
+     {
        for(int j=0;j<9;j++)
-      { 
+      {
        K[j]=sample[p].tue[j];
        C[j]=sample[p].tues[j];
       }
      }
  else if(strcmpi(ch,"We")==0)
  { for(int k=0;k<9;k++)
-   { 
+   {
      K[k]=sample[p].wed[k];
      C[k]=sample[p].wedn[k];
     }
@@ -129,44 +400,44 @@ void resettt(day &x,char ch[3],int subb)
      K[m]=sample[p].fri[m];
      C[m]=sample[p].frid[m];
     }
- }	
- 
- 
+ }
+
+
   for(int y=0; y<9;y++)
   {
 	  if(C[y]==subb)
 	  {
 		  C[y]=0;
 		  K[y]=0;
-	  }  
+	  }
   }
-  
+
   if(strcmpi(ch,"Mo")==0)
-       { 
-          for(int j=0;j<9;j++)
-        { 
-          sample[p].mon[j]=K[j];
-          sample[p].mond[j]=C[j];
-        }
+       {
+	  for(int j=0;j<9;j++)
+	{
+	  sample[p].mon[j]=K[j];
+	  sample[p].mond[j]=C[j];
+	}
        }
       else if(strcmpi(ch,"Tu")==0)
-     { 
+     {
        for(int j=0;j<9;j++)
-      { 
+      {
        sample[p].tue[j]=K[j];
        sample[p].tues[j]=C[j];
       }
      }
  else if(strcmpi(ch,"We")==0)
  { for(int k=0;k<9;k++)
-   { 
+   {
      sample[p].wed[k]=K[k];
      sample[p].wedn[k]=C[k];
     }
  }
  else if(strcmpi(ch,"Th")==0)
  { for(int q=0;q<9;q++)
-   { 
+   {
      sample[p].thu[q]=K[q];
      sample[p].thur[q]=C[q];
     }
@@ -177,9 +448,9 @@ void resettt(day &x,char ch[3],int subb)
      sample[p].fri[m]=K[m];
      sample[p].frid[m]=C[m];
     }
- }	
+ }
 	}
-	
+
 }
 
 
@@ -196,46 +467,46 @@ void substitution()
      cin>>periodno;
      int i;
       switch(subday)
-      { 
+      {
        case 1: {cout<<"Substitution teachers for requested day and period: ";
-               for(i=0; i<=checkm; i++)
-               {
-                 if(sample[i].mon[periodno-1]==0)
-                 {
-                   cout<<"\n"<<sample[i].name<<" is available";
-                   }
+	       for(i=0; i<=checkm; i++)
+	       {
+		 if(sample[i].mon[periodno-1]==0)
+		 {
+		   cout<<"\n"<<sample[i].name<<" is available";
+		   }
 	   } break;}
        case 2: {cout<<"Substitution teachers for requested day and period: ";
-               for(i=0; i<=checkm; i++)
-               {
-                 if(sample[i].tue[periodno-1]==0)
-                 {
-                   cout<<"\n"<<sample[i].name<<" is available";
-                   }
+	       for(i=0; i<=checkm; i++)
+	       {
+		 if(sample[i].tue[periodno-1]==0)
+		 {
+		   cout<<"\n"<<sample[i].name<<" is available";
+		   }
 	   } break;}
       case 3: {cout<<"Substitution teachers for requested day and period: ";
-               for(i=0; i<=checkm; i++)
-               {
-                 if(sample[i].wed[periodno-1]==0)
-                 {
-                   cout<<"\n"<<sample[i].name<<" is available";
-                   }
+	       for(i=0; i<=checkm; i++)
+	       {
+		 if(sample[i].wed[periodno-1]==0)
+		 {
+		   cout<<"\n"<<sample[i].name<<" is available";
+		   }
 	  } break;}
      case 4: {cout<<"Substitution teachers for requested day and period: ";
-               for(i=0; i<=checkm; i++)
-               {
-                 if(sample[i].thu[periodno-1]==0)
-                 {
-                   cout<<"\n"<<sample[i].name<<" is available";
-                   }
+	       for(i=0; i<=checkm; i++)
+	       {
+		 if(sample[i].thu[periodno-1]==0)
+		 {
+		   cout<<"\n"<<sample[i].name<<" is available";
+		   }
 	 } break;}
      case 5: {cout<<"Substitution teachers for requested day and period: ";
-               for(int i=0; i<=checkm; i++)
-               {
-                 if(sample[i].fri[periodno-1]==0)
-                 {
-                   cout<<"\n"<<sample[i].name<<" is available";
-                   }
+	       for(int i=0; i<=checkm; i++)
+	       {
+		 if(sample[i].fri[periodno-1]==0)
+		 {
+		   cout<<"\n"<<sample[i].name<<" is available";
+		   }
 	 } break;}
 }}
 int menu()
@@ -244,7 +515,7 @@ int menu()
 cin>>answer;
 return answer;
 }
- 
+
 int search(char searcha[40]="09389219", int k=0)
 {  if(k==0){
   for(int i=0; i<count; i++)
@@ -269,7 +540,7 @@ int search(char searcha[40]="09389219", int k=0)
 return -1;
 }
 void assembly(day &x, int ans3);
-int input(day &x,char ch[3], int suanswer)
+int input(day &x,char ch[3], int suanswer,int u=0)
 {   if(temp>count)
      count=temp;
     count++;
@@ -288,12 +559,15 @@ int input(day &x,char ch[3], int suanswer)
  }
  cout<<"\nEnter subject"<<endl<<"1. Physics - phy\n2. Chemistry - chem\n3. Mathematics - math\n4. English - eng\n5. Computer - comp\n6. Biology - bio\n7. Grade 11 elective - elec\n8. General studies - GS\n9. EE - EE\n10. VPA - VPA\n11. Art - art\n12. Yoga - yoga\n13. PT - PT\n14. Club\n15. Third Language Elective - lang\n16. Second Language elective grades 9-10 - seclang\n17. History - hist\n18. Civics - civ\n19. Geography- geo\n20. Social studies (for grades below 6) - SS \n21. AEP - AEP\n22. EVS - EVS\n23. Gen. Science - GSc\n24. Reading period - RP\n25. Indian Music - IM\n26. Western Music - WM\n27. Dance - Dan\n28. Life Skills - LS\n29. Math lab - ML\n30. March Past - MP\n";
  cin>>sample[count].subject;
- cout<<"\nEnter first two letters of the day\nMonday - mo\nTuesday - tu\nWednesday - we\nThursday - th\nFriday - fr\n\n";
- cin>>ch;
- cout<<"\nEnter no. of periods required for today: ";
- cin>>subjectcount;
-
+ if(u==0)
+ {cout<<"\nEnter first two letters of the day\nMonday - mo\nTuesday - tu\nWednesday - we\nThursday - th\nFriday - fr\n\n";
+  cin>>ch;
+  cout<<"\nEnter no. of periods required for today: ";
+  cin>>subjectcount;
  return subjectcount;
+ }
+ else
+	 return 1;
 }
 
 int temp2=15;
@@ -1019,6 +1293,12 @@ char ans;
 void main()
 { roomzero();
  int answer;
+ do{ cout<<"INITIALIZING HELP PROTOCOL";
+	 initial();
+	 cout<<"Continue?";
+	 int ans;
+	 cin>>ans;
+ }while(ans==1);
 do{
   clrscr();
   answer=menu();
@@ -1476,6 +1756,8 @@ cin>>newans;
   int y;
   cin>>y;
 }
+
+
 
 
 
