@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : SmartTimeTable.cpp
 // Author      : Arun,Aniket,Dhruv,Akif
-// Version     :1.0.7
+// Version     : 1.2.1
 // Copyright   : copyright
 // Description : A smart time table
 //============================================================================ 
