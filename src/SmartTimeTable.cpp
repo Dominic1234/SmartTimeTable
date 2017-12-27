@@ -7,6 +7,7 @@
 //============================================================================ 
 //#AlmostDone
 
+
 #include<iostream.h>
 #include<stdlib.h>
 #include<string.h>
@@ -28,13 +29,162 @@ struct day
 };
 
 int count=-1, temp=-1;
+int checkm=-1;
 char newans;
 teacher sample[40];
 day a12a,b12b,a11a, b11b,a10a,b10b,c10c,a9a,b9b,c9c,a8a,b8b,c8c,a7a,b7b,c7c,a6a,b6b,c6c,a5a,b5b,c5c,a4a,b4b,c4c,a3a,b3b,c3c,a2a,b2b,c2c,a1a,b1b,c1c;
+day mroom, biotech, avroom, ground, sstlab, audi, slab, artroom, mathlab, complab1, complab2, lib1, lib2, greenroom;
 
 void teacherzero(day &x, int &ans2);
 void algorithm(day &x);
 void display(day &x);
+void saveteacher(int P[9])
+{
+	   
+	  if(P[0]!=0&&P[1]!=0&&P[2]==0)
+	  P[2]=123;
+      if(P[0]!=0&&P[2]!=0&&P[1]==0)
+	  P[1]=123;
+	  if(P[1]!=0&&P[2]!=0&&P[0]==0)
+	   P[0]=123;
+	  if(P[3]!=0&&P[4]!=0&&P[5]==0)
+	  P[5]=123;
+	  if(P[5]!=0&&P[4]!=0&&P[3]==0)
+	  P[3]=123;
+      if(P[3]!=0&&P[5]!=0&&P[4]==0)
+	  P[4]=123;
+	  if(P[6]!=0&&P[7]!=0&&P[8]==0)
+	  P[8]=123;
+	  if(P[7]!=0&&P[8]!=0&&P[6]==0)
+	  P[6]=123;
+      if(P[6]!=0&&P[8]!=0&&P[7]==0)
+	  P[7]=123;
+
+}
+
+
+
+void resettt(day &x,char ch[3],int subb)
+{    int C[9], K[9];
+	 if(strcmpi(ch,"Mo")==0)
+    { for(int k=0;k<9;k++)
+       x.mon[k]=0;
+    }
+
+	if(strcmpi(ch,"Tu")==0)
+    { for(int k=0;k<9;k++)
+       x.tue[k]=0;
+    }
+
+	if(strcmpi(ch,"We")==0)
+    { for(int k=0;k<9;k++)
+       x.wed[k]=0;
+    }
+
+	if(strcmpi(ch,"Th")==0)
+    { for(int k=0;k<9;k++)
+       x.thur[k]=0;
+    }
+
+	if(strcmpi(ch,"Fr")==0)
+    { for(int k=0;k<9;k++)
+       x.fri[k]=0;
+    }
+		
+    for(int p=0; p<=checkm; p++)
+	{  
+	  if(strcmpi(ch,"Mo")==0)
+       { 
+          for(int j=0;j<9;j++)
+        { 
+          K[j]=sample[p].mon[j];
+          C[j]=sample[p].mond[j];
+        }
+       }
+      else if(strcmpi(ch,"Tu")==0)
+     { 
+       for(int j=0;j<9;j++)
+      { 
+       K[j]=sample[p].tue[j];
+       C[j]=sample[p].tues[j];
+      }
+     }
+ else if(strcmpi(ch,"We")==0)
+ { for(int k=0;k<9;k++)
+   { 
+     K[k]=sample[p].wed[k];
+     C[k]=sample[p].wedn[k];
+    }
+ }
+ else if(strcmpi(ch,"Th")==0)
+ { for(int q=0;q<9;q++)
+   { ;
+     K[q]=sample[p].thu[q];
+     C[q]=sample[p].thur[q];
+    }
+ }
+ else if(strcmpi(ch,"Fr")==0)
+ { for(int m=0;m<9;m++)
+   {
+     K[m]=sample[p].fri[m];
+     C[m]=sample[p].frid[m];
+    }
+ }	
+ 
+ 
+  for(int y=0; y<9;y++)
+  {
+	  if(C[y]==subb)
+	  {
+		  C[y]=0;
+		  K[y]=0;
+	  }  
+  }
+  
+  if(strcmpi(ch,"Mo")==0)
+       { 
+          for(int j=0;j<9;j++)
+        { 
+          sample[p].mon[j]=K[j];
+          sample[p].mond[j]=C[j];
+        }
+       }
+      else if(strcmpi(ch,"Tu")==0)
+     { 
+       for(int j=0;j<9;j++)
+      { 
+       sample[p].tue[j]=K[j];
+       sample[p].tues[j]=C[j];
+      }
+     }
+ else if(strcmpi(ch,"We")==0)
+ { for(int k=0;k<9;k++)
+   { 
+     sample[p].wed[k]=K[k];
+     sample[p].wedn[k]=C[k];
+    }
+ }
+ else if(strcmpi(ch,"Th")==0)
+ { for(int q=0;q<9;q++)
+   { 
+     sample[p].thu[q]=K[q];
+     sample[p].thur[q]=C[q];
+    }
+ }
+ else if(strcmpi(ch,"Fr")==0)
+ { for(int m=0;m<9;m++)
+   {
+     sample[p].fri[m]=K[m];
+     sample[p].frid[m]=C[m];
+    }
+ }	
+	}
+	
+}
+
+
+
+
 
 void substitution()
 {    clrscr();
@@ -46,55 +196,55 @@ void substitution()
      cin>>periodno;
      int i;
       switch(subday)
-      {
-       case 1: cout<<"Substitution teachers for requested day and period: ";
-               for(i=0; i<=count; i++)
+      { 
+       case 1: {cout<<"Substitution teachers for requested day and period: ";
+               for(i=0; i<=checkm; i++)
                {
                  if(sample[i].mon[periodno-1]==0)
                  {
                    cout<<"\n"<<sample[i].name<<" is available";
                    }
-                   } break;
-       case 2: cout<<"Substitution teachers for requested day and period: ";
-               for(i=0; i<=count; i++)
+	   } break;}
+       case 2: {cout<<"Substitution teachers for requested day and period: ";
+               for(i=0; i<=checkm; i++)
                {
                  if(sample[i].tue[periodno-1]==0)
                  {
                    cout<<"\n"<<sample[i].name<<" is available";
                    }
-                   } break;
-      case 3: cout<<"Substitution teachers for requested day and period: ";
-               for(i=0; i<=count; i++)
+	   } break;}
+      case 3: {cout<<"Substitution teachers for requested day and period: ";
+               for(i=0; i<=checkm; i++)
                {
                  if(sample[i].wed[periodno-1]==0)
                  {
                    cout<<"\n"<<sample[i].name<<" is available";
                    }
-                   } break;
-     case 4: cout<<"Substitution teachers for requested day and period: ";
-               for(i=0; i<=count; i++)
+	  } break;}
+     case 4: {cout<<"Substitution teachers for requested day and period: ";
+               for(i=0; i<=checkm; i++)
                {
                  if(sample[i].thu[periodno-1]==0)
                  {
                    cout<<"\n"<<sample[i].name<<" is available";
                    }
-                   } break;
-     case 5: cout<<"Substitution teachers for requested day and period: ";
-               for(int i=0; i<=count; i++)
+	 } break;}
+     case 5: {cout<<"Substitution teachers for requested day and period: ";
+               for(int i=0; i<=checkm; i++)
                {
                  if(sample[i].fri[periodno-1]==0)
                  {
                    cout<<"\n"<<sample[i].name<<" is available";
                    }
-                   } break;
+	 } break;}
 }}
 int menu()
 { int answer;
- cout<<"Timetable generator\nPlease select a class\n1. 12A     2. 12B     3. 11A     4. 11B     5. 10A      6. 10B\n7. 10C     8. 9A      9. 9B      10. 9C     11. 8A     12. 8B\n13. 8C     14. 7A     15. 7B     16. 7C     17. 6A     18. 6B\n19. 6C     20. 5A     21. 5B     22. 5C     23. 4A     24. 4B\n25. 4C     26. 3A     27. 3B     28. 3C     29. 2A     30. 2B\n31. 2C     32. 1A     33. 1B     34. 1C     \n\n35.Display teacher timetable\n36.Display timetable for any class\n37.Check for substitution\n38.Exit\n\nEnter option number: ";
+ cout<<"Timetable generator\nPlease select a class\n1. 12A     2. 12B     3. 11A     4. 11B     5. 10A      6. 10B\n7. 10C     8. 9A      9. 9B      10. 9C     11. 8A     12. 8B\n13. 8C     14. 7A     15. 7B     16. 7C     17. 6A     18. 6B\n19. 6C     20. 5A     21. 5B     22. 5C     23. 4A     24. 4B\n25. 4C     26. 3A     27. 3B     28. 3C     29. 2A     30. 2B\n31. 2C     32. 1A     33. 1B     34. 1C     \n\n35.Display teacher timetable\n36.Display timetable for any class\n37.Check for substitution\n38.Reset any class timetable\n39.Exit\n\nEnter option number: ";
 cin>>answer;
 return answer;
 }
-
+ 
 int search(char searcha[40]="09389219", int k=0)
 {  if(k==0){
   for(int i=0; i<count; i++)
@@ -103,7 +253,8 @@ int search(char searcha[40]="09389219", int k=0)
     {
       return i;
     }
-  } }
+  }
+  }
   else if(k==1)
   {
     for(int i=0; i<=count; i++)
@@ -112,15 +263,17 @@ int search(char searcha[40]="09389219", int k=0)
     {
       return i;
     }
-  }}
+  } cout<<"teacher does not exist try again displaying teacher 1 by default protection case"<<endl;
+    return 0;
+  }
 return -1;
 }
 void assembly(day &x, int ans3);
-
 int input(day &x,char ch[3], int suanswer)
 {   if(temp>count)
      count=temp;
     count++;
+    checkm++;
   teacherzero(x,suanswer);
   assembly(x, suanswer);
  int subjectcount;
@@ -129,6 +282,7 @@ int input(day &x,char ch[3], int suanswer)
  int store = search();
  if(store!=-1)
  { count--;
+   checkm--;
    temp=count;
    count=store;
  }
@@ -189,18 +343,26 @@ void algorithm(day &x, int &subanswer)
     }
  }
 
+long double idiot =0;
+int flag=0;
 
  for(int i=0; i<subcount; i++)
- {
-   randomize();
+ { 
+   idiot++;
+   if(idiot==5000000)
+   {
+	   flag=1;
+	   break;
+   }
+   saveteacher(A);randomize();
 	periodno=random(9999)+1;
 	periodno=periodno%9;
    if(periodno==0)
 	periodno=9;
    if(A[periodno-1]==0)
-   {
+   {   
     if(B[periodno-1]==0)
-    { C[periodno-1]=subanswer;
+    { C[periodno-1]=subanswer; 
       if(strcmpi(sample[count].subject,"Math")==0)
       { B[periodno-1]=1;
 		A[periodno-1]=1;
@@ -306,7 +468,7 @@ void algorithm(day &x, int &subanswer)
     --i;
     continue;
    }
-
+ }
  if(strcmpi(say,"Mo")==0)
  { for(int i=0;i<9;i++)
    { x.mon[i]=B[i];
@@ -342,8 +504,19 @@ else if(strcmpi(say,"Tu")==0)
      sample[count].frid[i]=C[i];
     }
  }
+  if(flag==1)
+ {
+   cout<<"The day has been reset due to teacher unavailability. Please enter details again.     ";
+   char y;
+   cin>>y;
+   resettt(x,say,subanswer);
  }
  }
+
+ 
+ 
+
+
 
 
 void display(day &x)
@@ -360,23 +533,23 @@ void display(day &x)
  for(int j=0; j<9; j++)
  {   if(i==1)
 	  { for(int q=0;q<9;q++)
-	 A[q]=x.mon[j];
+	 A[q]=x.mon[q];
 	   }
 	  else if(i==2)
 	  { for(int q=0;q<9;q++)
-	      A[q]=x.tue[j];
+	      A[q]=x.tue[q];
 	   }
 	  else if(i==3)
 	  { for(int q=0;q<9;q++)
-	      A[q]=x.wed[j];
+	      A[q]=x.wed[q];
 	   }
 	  else if(i==4)
 	  { for(int q=0;q<9;q++)
-	      A[q]=x.thur[j];
+	      A[q]=x.thur[q];
 	   }
 	  else if(i==5)
 	  { for(int q=0;q<9;q++)
-	      A[q]=x.fri[j];
+	      A[q]=x.fri[q];
 	   }
 
 
@@ -416,7 +589,7 @@ void display(day &x)
    else if(A[j]==100)
    cout<<"Ass   ";
    else if(A[j]==30)
-   cout<<"MP  ";
+   cout<<"MP    ";
 else if(A[j]==17)
    cout<<"His   ";
 else if(A[j]==18)
@@ -443,6 +616,8 @@ else if(A[j]==28)
    cout<<"LS    ";
 else if(A[j]==29)
    cout<<"ML    ";
+else if(i==123)
+	cout<<"R    ";
    else
    cout<<"NA    ";
 
@@ -557,6 +732,8 @@ else if(A[j]==28)
    cout<<"LS    ";
 else if(A[j]==29)
    cout<<"ML    ";
+else if(i==123)
+	cout<<"R    ";
 	else
 	cout<<"NA    ";
  }
@@ -604,6 +781,83 @@ for(j=0; j<9; j++)
 
 }
 
+void roomzero()
+{
+	for(int i=0; i<9; i++)
+	{
+	mroom.mon[i]=0;
+	mroom.tue[i]=0;
+	mroom.wed[i]=0;
+	mroom.thur[i]=0;
+	mroom.fri[i]=0;
+	biotech.mon[i]=0;
+	biotech.tue[i]=0;
+	biotech.wed[i]=0;
+	biotech.thur[i]=0;
+	biotech.fri[i]=0;
+	avroom.mon[i]=0;
+	avroom.tue[i]=0;
+	avroom.wed[i]=0;
+	avroom.thur[i]=0;
+	avroom.fri[i]=0;
+	ground.mon[i]=0;
+	ground.tue[i]=0;
+	ground.wed[i]=0;
+	ground.thur[i]=0;
+	ground.fri[i]=0;
+	sstlab.mon[i]=0;
+	sstlab.tue[i]=0;
+	sstlab.wed[i]=0;
+	sstlab.thur[i]=0;
+	sstlab.fri[i]=0;
+	audi.mon[i]=0;
+	audi.tue[i]=0;
+	audi.wed[i]=0;
+	audi.thur[i]=0;
+	audi.fri[i]=0;
+	slab.mon[i]=0;
+	slab.tue[i]=0;
+	slab.wed[i]=0;
+	slab.thur[i]=0;
+	slab.fri[i]=0;
+	artroom.mon[i]=0;
+	artroom.tue[i]=0;
+	artroom.wed[i]=0;
+	artroom.thur[i]=0;
+	artroom.fri[i]=0;
+	mathlab.mon[i]=0;
+	mathlab.tue[i]=0;
+	mathlab.wed[i]=0;
+	mathlab.thur[i]=0;
+	mathlab.fri[i]=0;
+	complab1.mon[i]=0;
+	complab1.tue[i]=0;
+	complab1.wed[i]=0;
+	complab1.thur[i]=0;
+	complab1.fri[i]=0;
+	complab2.mon[i]=0;
+	complab2.tue[i]=0;
+	complab2.wed[i]=0;
+	complab2.thur[i]=0;
+	complab2.fri[i]=0;
+	lib1.mon[i]=0;
+	lib1.tue[i]=0;
+	lib1.wed[i]=0;
+	lib1.thur[i]=0;
+	lib1.fri[i]=0;
+	lib2.mon[i]=0;
+	lib2.tue[i]=0;
+	lib2.wed[i]=0;
+	lib2.thur[i]=0;
+	lib2.fri[i]=0;
+	greenroom.mon[i]=0;
+	greenroom.tue[i]=0;
+	greenroom.wed[i]=0;
+	greenroom.thur[i]=0;
+	greenroom.fri[i]=0;
+     }
+}
+
 void assembly(day &x, int ans3)
 {
        static int f=0;
@@ -634,6 +888,7 @@ void teacherzero(day &x,int &ans2)
    }
    if(k==0)
    { 
+   
     for(int j=0;j<9;j++)
     {
     x.mon[j]=0;
@@ -762,7 +1017,7 @@ char ans;
  */
 
 void main()
-{
+{ roomzero();
  int answer;
 do{
   clrscr();
@@ -1165,7 +1420,53 @@ do{
 	
 case 37: substitution();break;
 
-case 38:
+case 38: 
+    clrscr();
+	cout<<"\nPlease select a class\n1. 12A     2. 12B     3. 11A     4. 11B     5. 10A      6. 10B\n7. 10C     8. 9A      9. 9B      10. 9C     11. 8A     12. 8B\n13. 8C     14. 7A     15. 7B     16. 7C     17. 6A     18. 6B\n19. 6C     20. 5A     21. 5B     22. 5C     23. 4A     24. 4B\n25. 4C     26. 3A     27. 3B     28. 3C     29. 2A     30. 2B\n31. 2C     32. 1A     33. 1B     34. 1C     \n\n";
+	cin>>caseans;
+	clrscr();
+	char ansday[3];
+	cout<<"\nEnter day to be reset: \nMonday - mo\nTuesday- tu\nWednesday - we\nThursday - th\nFriday - fr\n";
+	cin>>ansday;
+	if(caseans==1)resettt(a12a,ansday,caseans);
+	else if(caseans==2)resettt(b12b,ansday,caseans);
+	else if(caseans==3)resettt(a11a,ansday,caseans);
+	else if(caseans==4)resettt(b11b,ansday,caseans);
+	else if(caseans==5)resettt(a10a,ansday,caseans);
+	else if(caseans==6)resettt(b10b,ansday,caseans);
+	else if(caseans==7)resettt(c10c,ansday,caseans);
+	else if(caseans==8)resettt(a9a,ansday,caseans);
+	else if(caseans==9)resettt(b9b,ansday,caseans);
+	else if(caseans==10)resettt(c9c,ansday,caseans);
+	else if(caseans==11)resettt(a8a,ansday,caseans);
+	else if(caseans==12)resettt(b8b,ansday,caseans);
+	else if(caseans==13)resettt(c8c,ansday,caseans);
+	else if(caseans==14)resettt(a7a,ansday,caseans);
+	else if(caseans==15)resettt(b7b,ansday,caseans);
+	else if(caseans==16)resettt(c7c,ansday,caseans);
+	else if(caseans==17)resettt(a6a,ansday,caseans);
+	else if(caseans==18)resettt(b6b,ansday,caseans);
+	else if(caseans==19)resettt(c6c,ansday,caseans);
+	else if(caseans==20)resettt(a5a,ansday,caseans);
+	else if(caseans==21)resettt(b5b,ansday,caseans);
+	else if(caseans==22)resettt(c5c,ansday,caseans);
+	else if(caseans==23)resettt(a4a,ansday,caseans);
+	else if(caseans==24)resettt(b4b,ansday,caseans);
+	else if(caseans==25)resettt(c4c,ansday,caseans);
+	else if(caseans==26)resettt(a3a,ansday,caseans);
+	else if(caseans==27)resettt(b3b,ansday,caseans);
+	else if(caseans==28)resettt(c3c,ansday,caseans);
+	else if(caseans==29)resettt(a2a,ansday,caseans);
+	else if(caseans==30)resettt(b2b,ansday,caseans);
+	else if(caseans==31)resettt(c2c,ansday,caseans);
+	else if(caseans==32)resettt(a1a,ansday,caseans);
+	else if(caseans==33)resettt(b1b,ansday,caseans);
+	else if(caseans==34)resettt(c1c,ansday,caseans);
+	cout<<"\nTimetable for the day requested has been successfully reset.";
+	
+	
+	
+case 39:
      newans='n'; break;
 }
 cout<<"\nDo you want to continue the timetable generator>> Yes(y) or No(n) ";
@@ -1175,6 +1476,8 @@ cin>>newans;
   int y;
   cin>>y;
 }
+
+
 
 
 
