@@ -7,6 +7,7 @@
 //============================================================================ 
 //#AlmostDone
 
+
 #include<iostream.h>
 #include<stdlib.h>
 #include<string.h>
@@ -31,13 +32,13 @@ int count=-1, temp=-1;
 int checkm=-1;
 char newans;
 int answer12312;
-teacher sample[40];
+teacher sample[100];
 day a12a,b12b,a11a, b11b,a10a,b10b,c10c,a9a,b9b,c9c,a8a,b8b,c8c,a7a,b7b,c7c,a6a,b6b,c6c,a5a,b5b,c5c,a4a,b4b,c4c,a3a,b3b,c3c,a2a,b2b,c2c,a1a,b1b,c1c;
 day mroom, biotech, avroom, ground, sstlab, audi, slab, artroom, mathlab, complab1, complab2, lib1, lib2, greenroom;
 
 void teacherzero(day &x, int &ans2);
 void algorithm(day &x);
-void display(day &x, int &answer, int u);
+void display(day &x, int &answer, int u,int v);
 int input(day &x,char ch[3], int suanswer,int u);
 int menu(int pass=0);
 void initial2(day &x);
@@ -475,7 +476,7 @@ else if(strcmpi(dayt,"Tu")==0)
  }
 	}
 
-	 display(x,answer12312,0) ;
+	 display(x,answer12312,0,0) ;
 
 	
 
@@ -508,9 +509,10 @@ void saveteacher(int P[9])
 
 
 
-void resettt(day &x,char ch[3],int subb)
+void resettt(day &x,char ch[3],int subb,int m=0)
 {    int C[9], K[9];
-	 if(strcmpi(ch,"Mo")==0)
+if(m==0)
+{  if(strcmpi(ch,"Mo")==0)
 	 { for(int k=0;k<9;k++)
 		 x.mon[k]=0;
 	 }
@@ -534,6 +536,23 @@ void resettt(day &x,char ch[3],int subb)
 	 { for(int k=0;k<9;k++)
 		 x.fri[k]=0;
 	 }
+}
+else
+{ cout<<"\nEnter period number to be deleted:  ";
+  cin>>m;
+  if(strcmpi(ch,"Mo")==0)
+		 x.mon[m-1]=0;
+  if(strcmpi(ch,"Tu")==0)
+		 x.tue[m-1]=0;
+	if(strcmpi(ch,"We")==0)
+		 x.wed[m-1]=0;
+	if(strcmpi(ch,"Th")==0)
+		 x.thur[m-1]=0;
+	if(strcmpi(ch,"Fr")==0)
+		 x.fri[m-1]=0;
+	 
+  
+}
 
 	 for(int p=0; p<=checkm; p++)
 	{
@@ -575,13 +594,23 @@ void resettt(day &x,char ch[3],int subb)
 	 }
  }
 
-
-  for(int y=0; y<9;y++)
-  {
+  if(m==0)
+  {	  
+    for(int y=0; y<9;y++)
+    {
 	  if(C[y]==subb)
 	  {
 		  C[y]=0;
 		  K[y]=0;
+	  }
+    }
+  }
+  else{
+	 
+	  if(C[m-1]==subb)
+	  {
+		  C[m-1]=0;
+		  K[m-1]=0;
 	  }
   }
 
@@ -685,7 +714,7 @@ void substitution()
 int menu(int pass)
 { int answer;
 if(pass==0)
-{cout<<"Timetable generator\nPlease select a class\n1. 12A     2. 12B     3. 11A     4. 11B     5. 10A      6. 10B\n7. 10C     8. 9A      9. 9B      10. 9C     11. 8A     12. 8B\n13. 8C     14. 7A     15. 7B     16. 7C     17. 6A     18. 6B\n19. 6C     20. 5A     21. 5B     22. 5C     23. 4A     24. 4B\n25. 4C     26. 3A     27. 3B     28. 3C     29. 2A     30. 2B\n31. 2C     32. 1A     33. 1B     34. 1C     \n\n35.Display teacher timetable\n36.Display timetable for any class\n37.Check for substitution\n38.Reset any class timetable\n39.Manual Period assignment mode\n40.Add teacher\n41.Add class\n42. Exit\n\nEnter option number: ";
+{cout<<"Timetable generator\nPlease select a class\n1. 12A     2. 12B     3. 11A     4. 11B     5. 10A      6. 10B\n7. 10C     8. 9A      9. 9B      10. 9C     11. 8A     12. 8B\n13. 8C     14. 7A     15. 7B     16. 7C     17. 6A     18. 6B\n19. 6C     20. 5A     21. 5B     22. 5C     23. 4A     24. 4B\n25. 4C     26. 3A     27. 3B     28. 3C     29. 2A     30. 2B\n31. 2C     32. 1A     33. 1B     34. 1C     \n\n35.Display teacher timetable\n36.Display timetable for any class\n37.Check for substitution\n38.Reset any class timetable\n39.Manual Period assignment mode\n40.Add teacher\n41.Add class\n42.Delete\n43.Display Science Lab\n44.Exit\n\nEnter option number: ";
 cin>>answer;
 return answer;}
 else{cout<<"\nTimetable generator\nPlease select a class\n1. 12A     2. 12B     3. 11A     4. 11B     5. 10A      6. 10B\n7. 10C     8. 9A      9. 9B      10. 9C     11. 8A     12. 8B\n13. 8C     14. 7A     15. 7B     16. 7C     17. 6A     18. 6B\n19. 6C     20. 5A     21. 5B     22. 5C     23. 4A     24. 4B\n25. 4C     26. 3A     27. 3B     28. 3C     29. 2A     30. 2B\n31. 2C     32. 1A     33. 1B     34. 1C\n35. Go to main generator     \n\nEnter option number: ";
@@ -776,16 +805,18 @@ void algorithm(day &x, int &subanswer)
 { int subcount;
   int periodno;
   char say[3];
- cout<<"\nEnter teacher details for the selected class";
+ // cout<<"\nEnter teacher details for the selected class";
  subcount=input(x,say,subanswer);
 	int A[9];//array for storing teacher's timetable
 	int B[9];//array for storing class timetable
 	int C[9];//array for storing which class the teacher teaches
+	int D[9];
   if(strcmpi(say,"Mo")==0)
  { for(int i=0;i<9;i++)
 	{ B[i]=x.mon[i];
 	  A[i]=sample[count].mon[i];
 	  C[i]=sample[count].mond[i];
+	  D[i]=slab.mon[i];
 	 }
  }
  else if(strcmpi(say,"Tu")==0)
@@ -793,6 +824,7 @@ void algorithm(day &x, int &subanswer)
 	{ B[j]=x.tue[j];
 	  A[j]=sample[count].tue[j];
 	  C[j]=sample[count].tues[j];
+	  D[j]=slab.tue[j];
 	 }
  }
  else if(strcmpi(say,"We")==0)
@@ -800,6 +832,7 @@ void algorithm(day &x, int &subanswer)
 	{ B[k]=x.wed[k];
 	  A[k]=sample[count].wed[k];
 	  C[k]=sample[count].wedn[k];
+	  D[k]=slab.wed[k];
 	 }
  }
  else if(strcmpi(say,"Th")==0)
@@ -807,6 +840,8 @@ void algorithm(day &x, int &subanswer)
 	{ B[i]=x.thur[i];
 	  A[i]=sample[count].thu[i];
 	  C[i]=sample[count].thur[i];
+	   D[i]=slab.thur[i];
+	  
 	 }
  }
  else if(strcmpi(say,"Fr")==0)
@@ -814,6 +849,7 @@ void algorithm(day &x, int &subanswer)
 	{ B[i]=x.fri[i];
 	  A[i]=sample[count].fri[i];
 	  C[i]=sample[count].frid[i];
+	   D[i]=slab.fri[i];
 	 }
  }
 
@@ -833,6 +869,8 @@ int flag=0;
 	periodno=periodno%9;
 	if(periodno==0)
 	periodno=9;
+  if(strcmpi(sample[count].subject,"sl")==0)
+  {  
 	if(A[periodno-1]==0)
 	{
 	 if(B[periodno-1]==0)
@@ -930,7 +968,8 @@ int flag=0;
 		 A[periodno-1]=30;}
 		 else if(strcmpi(sample[count].subject,"sl")==0)
 		{B[periodno-1]=31;
-		 A[periodno-1]=31;}
+		 A[periodno-1]=31;
+		  D[i]=suanswer;}
 
 	 }
 	 else
@@ -946,11 +985,15 @@ int flag=0;
 	 continue;
 	}
  }
+ else{--i; continue;
+ }
+ }
  if(strcmpi(say,"Mo")==0)
  { for(int i=0;i<9;i++)
 	{ x.mon[i]=B[i];
 	  sample[count].mon[i]=A[i];
 	  sample[count].mond[i]=C[i];
+	  slab.mon[i]=D[i];
 	 }
  }
 else if(strcmpi(say,"Tu")==0)
@@ -958,6 +1001,7 @@ else if(strcmpi(say,"Tu")==0)
 	{ x.tue[i]=B[i];
 	  sample[count].tue[i]=A[i];
 	  sample[count].tues[i]=C[i];
+	  slab.tue[i]=D[i];
 	 }
  }
  else if(strcmpi(say,"We")==0)
@@ -965,6 +1009,7 @@ else if(strcmpi(say,"Tu")==0)
 	{ x.wed[i]=B[i];
 	  sample[count].wed[i]=A[i];
 	  sample[count].wedn[i]=C[i];
+	  slab.wed[i]=D[i];
 	 }
  }
  else if(strcmpi(say,"Th")==0)
@@ -972,6 +1017,7 @@ else if(strcmpi(say,"Tu")==0)
 	{ x.thur[i]=B[i];
 	  sample[count].thu[i]=A[i];
 	  sample[count].thur[i]=C[i];
+	  slab.thur[i]=D[i];
 	 }
  }
  else if(strcmpi(say,"Fr")==0)
@@ -979,24 +1025,101 @@ else if(strcmpi(say,"Tu")==0)
 	{ x.fri[i]=B[i];
 	  sample[count].fri[i]=A[i];
 	  sample[count].frid[i]=C[i];
+	  slab.fri[i]=D[i];
 	 }
  }
   if(flag==1)
- {
-	cout<<"The day has been reset due to teacher unavailability. \nPlease enter details again. Enter 1 to continue. ";
-	char y;
+ { char y;
+	cout<<"We recommend that the day be reset. Do you want to reset the timetable for this day? (y/n) ";
 	cin>>y;
+	if(y=='y'||y=='Y')
+	{
+	cout<<"The day has been reset due to teacher unavailability. \nPlease enter details again. ";
 	resettt(x,say,subanswer);
+	}
  }
  }
+void displaylab()
+{
+	int A[9];
+ cout<<"\n     1     2     3    |4     5     6    |7     8     9\n";
+ for(int i=1;i<=5;i++)
+ {
+	  if(i==1)cout<<"Mon  ";
+		else if(i==2)cout<<"Tue  ";
+		else if(i==3)cout<<"Wed  ";
+		else if(i==4)cout<<"Thu  ";
+		else cout<<"Fri  ";
+ for(int j=0; j<9; j++)
+ {   if(i==1)
+	  { for(int q=0;q<9;q++)
+	 A[q]=slab;.mon[q];
+		}
+	  else if(i==2)
+	  { for(int q=0;q<9;q++)
+			A[q]=slab.tue[q];
+		}
+	  else if(i==3)
+	  { for(int q=0;q<9;q++)
+			A[q]=slab.wed[q];
+		}
+	  else if(i==4)
+	  { for(int q=0;q<9;q++)
+			A[q]=slab.thur[q];
+		}
+	  else if(i==5)
+	  { for(int q=0;q<9;q++)
+			A[q]=x.fri[q];
+		}
+ }
+for(j=0; j<9; j++)
+{
+	if(A[j]==1){if(j==2||j==5)cout<<"12A  |";else cout<<"12A   ";}
+	else if(A[j]==2){if(j==2||j==5)cout<<"12B  |";else cout<<"12B   ";}
+	else if(A[j]==3){if(j==2||j==5)cout<<"11A  |";else cout<<"11A   ";}
+	else if(A[j]==4){if(j==2||j==5)cout<<"11B  |";else cout<<"11B   ";}
+	else if(A[j]==5){if(j==2||j==5)cout<<"10A  |";else cout<<"10A   ";}
+	else if(A[j]==6){if(j==2||j==5)cout<<"10B  |";else cout<<"10B   ";}
+	else if(A[j]==7){if(j==2||j==5)cout<<"10C  |";else cout<<"10C   ";}
+	else if(A[j]==8){if(j==2||j==5)cout<<"9A   |";else cout<<"9A    ";}
+	else if(A[j]==9){if(j==2||j==5)cout<<"9B   |";else cout<<"9B    ";}
+	else if(A[j]==10){if(j==2||j==5)cout<<"9C   |";else cout<<"9C    ";}
+	else if(A[j]==11){if(j==2||j==5)cout<<"8A   |";else cout<<"8A    ";}
+	else if(A[j]==12){if(j==2||j==5)cout<<"8B   |";else cout<<"8B    ";}
+	else if(A[j]==13){if(j==2||j==5)cout<<"8C   |";else cout<<"8C    ";}
+	else if(A[j]==14){if(j==2||j==5)cout<<"7A   |";else cout<<"7A    ";}
+	else if(A[j]==15){if(j==2||j==5)cout<<"7B   |";else cout<<"7B    ";}
+	else if(A[j]==16){if(j==2||j==5)cout<<"7C   |";else cout<<"7C    ";}
+	else if(A[j]==17){if(j==2||j==5)cout<<"6A   |";else cout<<"6A    ";}
+	else if(A[j]==18){if(j==2||j==5)cout<<"6B   |";else cout<<"6B    ";}
+	else if(A[j]==19){if(j==2||j==5)cout<<"6C   |";else cout<<"6C    ";}
+	else if(A[j]==20){if(j==2||j==5)cout<<"5A   |";else cout<<"5A    ";}
+	else if(A[j]==21){if(j==2||j==5)cout<<"5B   |";else cout<<"5B    ";}
+	else if(A[j]==22){if(j==2||j==5)cout<<"5C   |";else cout<<"5C    ";}
+	else if(A[j]==23){if(j==2||j==5)cout<<"4A   |";else cout<<"4A    ";}
+	else if(A[j]==24){if(j==2||j==5)cout<<"4B   |";else cout<<"4B    ";}
+	else if(A[j]==25){if(j==2||j==5)cout<<"4C   |";else cout<<"4C    ";}
+	else if(A[j]==26){if(j==2||j==5)cout<<"3A   |";else cout<<"3A    ";}
+	else if(A[j]==27){if(j==2||j==5)cout<<"3B   |";else cout<<"3B    ";}
+	else if(A[j]==28){if(j==2||j==5)cout<<"3C   |";else cout<<"3C    ";}
+	else if(A[j]==29){if(j==2||j==5)cout<<"2A   |";else cout<<"2A    ";}
+	else if(A[j]==30){if(j==2||j==5)cout<<"2B   |";else cout<<"2B    ";}
+	else if(A[j]==31){if(j==2||j==5)cout<<"2C   |";else cout<<"2C    ";}
+	else if(A[j]==32){if(j==2||j==5)cout<<"1A   |";else cout<<"1A    ";}
+	else if(A[j]==33){if(j==2||j==5)cout<<"1B   |";else cout<<"1B    ";}
+	else if(A[j]==34){if(j==2||j==5)cout<<"1C   |";else cout<<"1C
+	}
+		
+
+	
+}
+ }
 
 
 
 
 
-
-
-void display(day &x, int &subanswer, int u=0)
+void display(day &x, int &subanswer, int u=0,int v=0)
 {
  int A[9];
  cout<<"\n     1     2     3    |4     5     6    |7     8     9\n";
@@ -1271,14 +1394,20 @@ else if(i==123)
  { char response;
   do
   {
+  if(v!=2)
+  {	  
   cout<<"\nIs there another teacher teaching this class for the periods assigned? (y/n) ";
   cin>>response;
   if(response=='y'||response=='Y')
   addteacher(x,subanswer);
-  cout<<"\nIs there another class to be assigned same period (y/n) ";
+  }
+  if(v!=1)
+  {  
+	  cout<<"\nIs there another class to be assigned same period (y/n) ";
   cin>>response;
   if(response=='y'||response=='Y')
   addclass(x,subanswer);
+  }
  }while(response=='y'||response=='Y');
  }
 }
@@ -1598,7 +1727,7 @@ for(j=0; j<9; j++)
 	else if(Ar[j]==33){if(j==2||j==5)cout<<"1B   |";else cout<<"1B    ";}
 	else if(Ar[j]==34){if(j==2||j==5)cout<<"1C   |";else cout<<"1C    ";}
 	else {if(j==2||j==5)cout<<"NA   |";else cout<<"NA    ";}
-	 }
+	}
 	cout<<"\n\n";
   }
 
@@ -1845,6 +1974,7 @@ char ans;
 
 void main()
 { roomzero();
+day x;
  int answer,ansq;
  do{ clrscr();
 	 cout<<"INTIAL PERIOD ASSIGNMENT MODE\nIn this mode you can manually assign periods as and when required\n";
@@ -1857,347 +1987,59 @@ do{
   clrscr();
   answer=menu();
   clrscr();
-  switch(answer)
- {
-  case 1:
-  do{
-  algorithm(a12a, answer);
-  display(a12a, answer);
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 2:
-do{
-  algorithm(b12b, answer);
-  display(b12b, answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 3:
-do{
-  algorithm(a11a, answer);
-  display(a11a, answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 4:
-do{
-  algorithm(b11b, answer);
-  display(b11b,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 5:
-do{
-  algorithm(a10a, answer);
-  display(a10a,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 6:
-do{
-  algorithm(b10b, answer);
-  display(b10b,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 7:
-do{
-  algorithm(c10c, answer);
-  display(c10c,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 8:
-do{
-  algorithm(a9a, answer);
-  display(a9a,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 9:
-do{
-  algorithm(b9b, answer);
-  display(b9b,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 10:
-do{
-  algorithm(c9c, answer);
-  display(c9c,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 11:
-do{
-  algorithm(a8a, answer);
-  display(a8a,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 12:
-do{
-  algorithm(b8b, answer);
-  display(b8b,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 13:
-do{
-  algorithm(c8c, answer);
-  display(c8c,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 14:
-do{
-  algorithm(a7a, answer);
-  display(a7a,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 15:
-do{
-  algorithm(b7b, answer);
-  display(b7b,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 16:
-do{
-  algorithm(c7c, answer);
-  display(c7c,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 17:
-do{
-  algorithm(a6a, answer);
-  display(a6a,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 18:
-do{
-  algorithm(b6b, answer);
-  display(b6b,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 19:
-do{
-  algorithm(c6c, answer);
-  display(c6c,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 20:
-do{
-  algorithm(a5a, answer);
-  display(a5a,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 21:
-do{
-  algorithm(b5b, answer);
-  display(b5b,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 22:
-do{
-  algorithm(c5c, answer);
-  display(c5c,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 23:
-do{
-  algorithm(a4a, answer);
-  display(a4a,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 24:
-do{
-  algorithm(b4b, answer);
-  display(b4b,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 25:
-do{
-  algorithm(c4c, answer);
-  display(c4c,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 26:
-do{
-  algorithm(a3a, answer);
-  display(a3a,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 27:
-do{
-  algorithm(b3b, answer);
-  display(b3b,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 28:
-do{
-  algorithm(c3c, answer);
-  display(c3c,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 29:
-do{
-  algorithm(a2a, answer);
-  display(a2a,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 30:
-do{
-  algorithm(b2b, answer);
-  display(b2b,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 31:
-do{
-  algorithm(c2c, answer);
-  display(c2c,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 32:
-do{
-  algorithm(a1a, answer);
-  display(a1a,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 33:
-do{
-  algorithm(b1b, answer);
-  display(b1b,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
-case 34:
-do{
-  algorithm(c1c, answer);
-  display(c1c,answer);
-  cout<<endl;
-  cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
-  cin>>ans;
-  clrscr();
-}while(ans=='y'); break;
-
+    if(answer==1) x=a12a;
+	else if(answer==2) x=b12b;
+	else if(answer==3) x=a11a;
+	else if(answer==4) x=b11b;
+	else if(answer==5) x=a10a;
+	else if(answer==6) x=b10b;
+	else if(answer==7) x=c10c;
+	else if(answer==8) x=a9a;
+	else if(answer==9) x=b9b;
+	else if(answer==10) x=c9c;
+	else if(answer==11) x=a8a;
+	else if(answer==12) x=b8b;
+	else if(answer==13) x=c8c;
+	else if(answer==14) x=a7a;
+	else if(answer==15) x=b7b;
+	else if(answer==16) x=c7c;
+	else if(answer==17)  x=a6a;
+	else if(answer==18)  x=b6b;
+	else if(answer==19)  x=c6c;
+	else if(answer==20)  x=a5a;
+	else if(answer==21) x=b5b;
+	else if(answer==22) x=c5c;
+	else if(answer==23)  x=a4a;
+	else if(answer==24)  x=b4b;
+	else if(answer==25)  x=c4c;
+	else if(answer==26)  x=a3a;
+	else if(answer==27)  x=b3b;
+	else if(answer==28) x=c3c;
+	else if(answer==29)    x=a2a;
+	else if(answer==30)   x=b2b;
+	else if(answer==31)   x=c2c;
+	else if(answer==32)   x=a1a;
+	else if(answer==33)   x=b1b;
+	else if(answer==34)   x=c1c;
+	  int answer1=answer;
+	   if (answer>=1&&answer<=34)
+		   answer=1;
+	   int q=1;
+	   if(answer==41)
+	   {  answer=40;
+          q=2;
+	   }  
+   
+switch(answer)
+  {
+	  case 1:
+	   do{
+      algorithm(x,answer1);
+      display(x,answer1,0,0);
+       cout<<"\nDo you want to enter details for more teachers? Yes(y) or No(n)";
+       cin>>ans;
+       clrscr();
+	   }while(ans=='y'); break;
 case 35:
 char searchitem[40];
 do{
@@ -2208,6 +2050,7 @@ do{
 	displayteacher(ivalue);
 }while(ans=='y'); break;
 
+	  
 case 36:
 int caseans;
 do{
@@ -2310,21 +2153,150 @@ case 39:
 	 cin>>ansq;
  }while(ansq==1); break;
 
- /*case 40:
+ case 40:
  clrscr();
-    addteacher(x,answer);   
- case 41:
-    addclass(x,answer);
-	*/
+do{
+	clrscr();
+	cout<<"Enter class to which teacher or additional class must me added to"<<endl;
+	cout<<"\nPlease select a class\n1. 12A     2. 12B     3. 11A     4. 11B     5. 10A      6. 10B\n7. 10C     8. 9A      9. 9B      10. 9C     11. 8A     12. 8B\n13. 8C     14. 7A     15. 7B     16. 7C     17. 6A     18. 6B\n19. 6C     20. 5A     21. 5B     22. 5C     23. 4A     24. 4B\n25. 4C     26. 3A     27. 3B     28. 3C     29. 2A     30. 2B\n31. 2C     32. 1A     33. 1B     34. 1C     \n\n";
+	 cin>>caseans;
+	if(caseans==1)display(a12a,caseans,0,q);
+	else if(caseans==2)display(b12b,caseans,0,q);
+	else if(caseans==3)display(a11a,caseans,0,q);
+	else if(caseans==4)display(b11b,caseans,0,q);
+	else if(caseans==5)display(a10a,caseans,0,q);
+	else if(caseans==6)display(b10b,caseans,0,q);
+	else if(caseans==7)display(c10c,caseans,0,q);
+	else if(caseans==8)display(a9a,caseans,0,q);
+	else if(caseans==9)display(b9b,caseans,0,q);
+	else if(caseans==10)display(c9c,caseans,0,q);
+	else if(caseans==11)display(a8a,caseans,0,q);
+	else if(caseans==12)display(b8b,caseans,0,q);
+	else if(caseans==13)display(c8c,caseans,0,q);
+	else if(caseans==14)display(a7a,caseans,0,q);
+	else if(caseans==15)display(b7b,caseans,0,q);
+	else if(caseans==16)display(c7c,caseans,0,q);
+	else if(caseans==17)display(a6a,caseans,0,q);
+	else if(caseans==18)display(b6b,caseans,0,q);
+	else if(caseans==19)display(c6c,caseans,0,q);
+	else if(caseans==20)display(a5a,caseans,0,q);
+	else if(caseans==21)display(b5b,caseans,0,q);
+	else if(caseans==22)display(c5c,caseans,0,q);
+	else if(caseans==23)display(a4a,caseans,0,q);
+	else if(caseans==24)display(b4b,caseans,0,q);
+	else if(caseans==25)display(c4c,caseans,0,q);
+	else if(caseans==26)display(a3a,caseans,0,q);
+	else if(caseans==27)display(b3b,caseans,0,q);
+	else if(caseans==28)display(c3c,caseans,0,q);
+	else if(caseans==29)display(a2a,caseans,0,q);
+	else if(caseans==30)display(b2b,caseans,0,q);
+	else if(caseans==31)display(c2c,caseans,0,q);
+	else if(caseans==32)display(a1a,caseans,0,q);
+	else if(caseans==33)display(b1b,caseans,0,q); 
+	           
+	  
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+	
+	
+	else if(caseans==34)display(c1c,answer,0);
+	}while(ans=='y'); break;
 case 42:
+	 {clrscr();
+	cout<<"\nPlease select a class\n1. 12A     2. 12B     3. 11A     4. 11B     5. 10A      6. 10B\n7. 10C     8. 9A      9. 9B      10. 9C     11. 8A     12. 8B\n13. 8C     14. 7A     15. 7B     16. 7C     17. 6A     18. 6B\n19. 6C     20. 5A     21. 5B     22. 5C     23. 4A     24. 4B\n25. 4C     26. 3A     27. 3B     28. 3C     29. 2A     30. 2B\n31. 2C     32. 1A     33. 1B     34. 1C     \n\n";
+	cin>>caseans;
+	clrscr();
+	char ansday[3];
+	cout<<"\nEnter day to be reset: \nMonday - mo\nTuesday- tu\nWednesday - we\nThursday - th\nFriday - fr\n\n";
+	cin>>ansday;
+	if(caseans==1)resettt(a12a,ansday,caseans,1);
+	else if(caseans==2)resettt(b12b,ansday,caseans,1);
+	else if(caseans==3)resettt(a11a,ansday,caseans,1);
+	else if(caseans==4)resettt(b11b,ansday,caseans,1);
+	else if(caseans==5)resettt(a10a,ansday,caseans,1);
+	else if(caseans==6)resettt(b10b,ansday,caseans,1);
+	else if(caseans==7)resettt(c10c,ansday,caseans,1);
+	else if(caseans==8)resettt(a9a,ansday,caseans,1);
+	else if(caseans==9)resettt(b9b,ansday,caseans,1);
+	else if(caseans==10)resettt(c9c,ansday,caseans,1);
+	else if(caseans==11)resettt(a8a,ansday,caseans,1);
+	else if(caseans==12)resettt(b8b,ansday,caseans,1);
+	else if(caseans==13)resettt(c8c,ansday,caseans,1);
+	else if(caseans==14)resettt(a7a,ansday,caseans,1);
+	else if(caseans==15)resettt(b7b,ansday,caseans,1);
+	else if(caseans==16)resettt(c7c,ansday,caseans,1);
+	else if(caseans==17)resettt(a6a,ansday,caseans,1);
+	else if(caseans==18)resettt(b6b,ansday,caseans,1);
+	else if(caseans==19)resettt(c6c,ansday,caseans,1);
+	else if(caseans==20)resettt(a5a,ansday,caseans,1);
+	else if(caseans==21)resettt(b5b,ansday,caseans,1);
+	else if(caseans==22)resettt(c5c,ansday,caseans,1);
+	else if(caseans==23)resettt(a4a,ansday,caseans,1);
+	else if(caseans==24)resettt(b4b,ansday,caseans,1);
+	else if(caseans==25)resettt(c4c,ansday,caseans,1);
+	else if(caseans==26)resettt(a3a,ansday,caseans,1);
+	else if(caseans==27)resettt(b3b,ansday,caseans,1);
+	else if(caseans==28)resettt(c3c,ansday,caseans,1);
+	else if(caseans==29)resettt(a2a,ansday,caseans,1);
+	else if(caseans==30)resettt(b2b,ansday,caseans,1);
+	else if(caseans==31)resettt(c2c,ansday,caseans,1);
+	else if(caseans==32)resettt(a1a,ansday,caseans,1);
+	else if(caseans==33)resettt(b1b,ansday,caseans,1);
+	else if(caseans==34)resettt(c1c,ansday,caseans,1);
+	  
+	cout<<"\nTimetable for the period requested has been successfully reset. ";
+	break;
+}
+case 43:
+{
+	displaylab();
+}
+case 44:
 	  newans='n'; break;
 
 }
+if(answer1==1) a12a=x;
+	else if(answer1==2) b12b=x;
+	else if(answer1==3) a11a=x;
+	else if(answer1==4) b11b=x;
+	else if(answer1==5) a10a=x;
+	else if(answer1==6) b10b=x;
+	else if(answer1==7) c10c=x;
+	else if(answer1==8) a9a=x;
+	else if(answer1==9) b9b=x;
+	else if(answer1==10) c9c=x;
+	else if(answer1==11) a8a=x;
+	else if(answer1==12) b8b=x;
+	else if(answer1==13) c8c=x;
+	else if(answer1==14) a7a=x;
+	else if(answer1==15) b7b=x;
+	else if(answer1==16) c7c=x;
+	else if(answer1==17)  a6a=x;
+	else if(answer1==18)  b6b=x;
+	else if(answer1==19)  c6c=x;
+	else if(answer1==20) a5a=x;
+	else if(answer1==21) b5b=x;
+	else if(answer1==22) c5c=x;
+	else if(answer1==23)  a4a=x;
+	else if(answer1==24)  b4b=x;
+	else if(answer1==25)  c4c=x;
+	else if(answer1==26)  a3a=x;
+	else if(answer1==27)  b3b=x;
+	else if(answer1==28)  c3c=x;
+	else if(answer1==29)   a2a=x;
+	else if(answer1==30)   b2b=x;
+	else if(answer1==31)   c2c=x;
+	else if(answer1==32)   a1a=x;
+	else if(answer1==33)   b1b=x;
+	else if(answer1==34)   c1c=x;
+	  
+	  
 cout<<"\nDo you want to continue the timetable generator>> Yes(y) or No(n) ";
 cin>>newans;
 }while(newans=='y') ;
 
 }
+
+
 
 
 
